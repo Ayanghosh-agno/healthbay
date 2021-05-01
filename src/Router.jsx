@@ -19,10 +19,11 @@ function PageRouter() {
 
   return (
     <div
-      className="w-screen overflow-hidden text-text-color-theme my-auto"
+      className="w-screen overflow-hidden text-text-color-theme my-auto mx-auto"
       style={{
         backgroundImage: "url('/assets/images/background.png')",
         backgroundRepeat: true,
+        maxWidth: "400px",
       }}
     >
       {loading ? (
