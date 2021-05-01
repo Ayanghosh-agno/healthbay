@@ -1,12 +1,14 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import Slider from "react-slick";
-import FilledButton from "../components/FilledButton";
 
 import Logo from "../components/Logo";
+import FilledButton from "../components/FilledButton";
 import OutlinedButton from "../components/OutlinedButton";
 import WelcomeCard from "../components/WelcomeCard";
 
 function Welcome() {
+  const history = useHistory();
   const [slideNo, setSlideNo] = useState(0);
 
   const settings = {
@@ -60,8 +62,18 @@ function Welcome() {
         ></div>
       </div>
       <div className="flex flex-row justify-center space-x-6 mt-6">
-        <FilledButton className="px-8 py-1">Sign Up</FilledButton>
-        <OutlinedButton className="px-8 py-1">Sign In</OutlinedButton>
+        <FilledButton
+          className="px-8 py-1"
+          onClick={() => history.push("/register")}
+        >
+          Sign Up
+        </FilledButton>
+        <OutlinedButton
+          className="px-8 py-1"
+          onClick={() => history.push("/register")}
+        >
+          Sign In
+        </OutlinedButton>
       </div>
     </div>
   );

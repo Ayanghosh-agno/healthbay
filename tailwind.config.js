@@ -12,6 +12,7 @@ module.exports = {
         primary: "#3B82F6",
         "primary-lighter": "#ECF3FF",
         "grayish-lighter": "#CCCCCC",
+        "text-color-theme": "#222222",
       },
     },
   },
