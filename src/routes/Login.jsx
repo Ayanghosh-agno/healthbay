@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import { Link, useHistory } from "react-router-dom";
 
 import { FaArrowLeft } from "react-icons/fa";
@@ -9,39 +9,76 @@ import InputField from "../components/InputField";
 import FilledButton from "../components/FilledButton";
 import OutlinedButton from "../components/OutlinedButton";
 
+import { useAuth } from "../contexts/AuthContext";
+
 function Login() {
   const history = useHistory();
+  const { signInEmail, regGoogle } = useAuth();
+
+  const email = useRef();
+  const password = useRef();
+
+  const [validationErr, setValidationErr] = useState("");
+
+  const handleSubmitSignup = async function (e) {
+    e.preventDefault();
+    try {
+      await signInEmail(email.current.value, password.current.value);
+    } catch (e) {
+      setValidationErr(e.message);
+    }
+  };
+
+  const signInWithGoogle = async function (e) {
+    e.preventDefault();
+    await regGoogle();
+  };
 
   return (
-    <div className="flex flex-col justify-center">
+    <div className="flex flex-col justify-center h-screen">
       <CircleIconButton
         className="mt-4 ml-2"
         icon={<FaArrowLeft />}
-        onClick={() => history.push("/")}
+        onClick={() => history.push("/welcome")}
       />
       <div className="flex flex-row justify-between items-end pl-6 mb-4 -mt-6">
-        <div className="font-bold text-4xl underline pb-2">Sign In</div>
-        <img src="/assets/images/sign-up.png" />
+        <div className="font-bold text-4xl underline pb-4">Login</div>
+        <img className="w-64" src="/assets/images/sign-up.png" alt="Signup" />
       </div>
-      <div className="mx-6">
+      <form onSubmit={handleSubmitSignup} className="mx-6">
         <div className="flex flex-col mb-4">
-          <label className="font-semibold uppercase" for="email">
+          <label className="font-semibold uppercase" htmlFor="email">
             Your Email
           </label>
-          <InputField className="mt-1 text-lg" type="text" id="email" />
+          <InputField
+            className="mt-1 text-lg"
+            type="text"
+            id="email"
+            ref={email}
+            error={validationErr}
+          />
         </div>
         <div className="flex flex-col">
-          <label className="font-semibold uppercase" for="password">
+          <label className="font-semibold uppercase" htmlFor="password">
             Password
           </label>
-          <InputField className="mt-1 text-lg" type="password" id="password" />
+          <InputField
+            className="mt-1 text-lg font-bold tracking-widest"
+            type="password"
+            id="password"
+            ref={password}
+            error={validationErr}
+          />
         </div>
-        <div className="flex flex-row mt-4 items-start space-x-2">
+        <div className="flex flex-row mt-4 items-start space-x-2 mb-4">
           <input type="checkbox" id="remember" className="bg-primary w-6 h-6" />
-          <label for="remember">Remember Me</label>
+          <label htmlFor="remember">Remember Me</label>
         </div>
-        <FilledButton className="mt-6 mb-4 w-full">Login</FilledButton>
-        <OutlinedButton className="w-full">
+        {validationErr && (
+          <div className="text-red-600 -mt-2">{validationErr}</div>
+        )}
+        <FilledButton className="mt-2 mb-4 w-full">Login</FilledButton>
+        <OutlinedButton onClick={signInWithGoogle} className="w-full">
           <FcGoogle className="mr-4" />
           Sign in with Google
         </OutlinedButton>
@@ -51,7 +88,7 @@ function Login() {
             Sign Up
           </Link>
         </div>
-      </div>
+      </form>
     </div>
   );
 }

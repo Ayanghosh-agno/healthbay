@@ -1,12 +1,15 @@
 import React from "react";
 
-function InputField(props) {
+const InputField = React.forwardRef((props, ref) => {
   return (
     <input
       {...props}
-      className={`bg-primary-lighter shadow rounded-md px-4 py-1 ${props.className}`}
+      ref={ref}
+      className={`bg-primary-lighter shadow rounded-md px-4 py-1 appearance-none ${
+        props.className
+      } ${props.error && "border-2 border-red-600"}`}
     ></input>
   );
-}
+});
 
 export default InputField;

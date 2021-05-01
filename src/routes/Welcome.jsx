@@ -16,7 +16,7 @@ function Welcome() {
     centerPadding: "35px",
     speed: 500,
     slidesToShow: 1,
-    slidesToScroll: 3,
+    slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 2000,
     afterChange: (index) => {
@@ -25,7 +25,7 @@ function Welcome() {
   };
 
   return (
-    <div className="flex flex-col justify-center text-black">
+    <div className="flex flex-col justify-center text-black h-screen">
       <Logo />
       <Slider className="mt-6" {...settings}>
         <WelcomeCard
