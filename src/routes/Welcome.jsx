@@ -70,7 +70,7 @@ function Welcome() {
         </FilledButton>
         <OutlinedButton
           className="px-8 py-1"
-          onClick={() => history.push("/register")}
+          onClick={() => history.push("/login")}
         >
           Sign In
         </OutlinedButton>
