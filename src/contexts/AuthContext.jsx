@@ -28,6 +28,9 @@ function AuthProvider({ children }) {
     const provider = new firebase.auth.GoogleAuthProvider();
     const result = await firebase.auth().signInWithPopup(provider);
     setCurrentUser(result.user);
+
+    const idToken = await result.user.getIdToken();
+    console.log(idToken);
   }
 
   async function signOut() {
