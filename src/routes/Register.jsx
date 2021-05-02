@@ -18,20 +18,26 @@ function Register() {
   const email = useRef();
   const password = useRef();
 
+  const [loading, setLoading] = useState(false);
   const [validationErr, setValidationErr] = useState("");
 
   const handleSubmitSignup = async function (e) {
     e.preventDefault();
+    setLoading(true);
     try {
       await regEmail(email.current.value, password.current.value);
     } catch (e) {
       setValidationErr(e.message);
+    } finally {
+      setLoading(false);
     }
   };
 
   const signUpWithGoogle = async function (e) {
     e.preventDefault();
+    setLoading(true);
     await regGoogle();
+    setLoading(false);
   };
 
   return (
@@ -52,7 +58,7 @@ function Register() {
           </label>
           <InputField
             className="mt-1 text-lg"
-            type="text"
+            type="email"
             id="email"
             ref={email}
             error={validationErr}
@@ -87,8 +93,14 @@ function Register() {
         {validationErr && (
           <div className="text-red-600 -mt-2">{validationErr}</div>
         )}
-        <FilledButton className="mt-2 mb-4 w-full">Create Account</FilledButton>
-        <OutlinedButton onClick={signUpWithGoogle} className="w-full">
+        <FilledButton className="mt-2 mb-4 w-full" loading={loading}>
+          Create Account
+        </FilledButton>
+        <OutlinedButton
+          loading={loading}
+          onClick={signUpWithGoogle}
+          className="w-full"
+        >
           <FcGoogle className="mr-4" />
           Sign up with Google
         </OutlinedButton>

@@ -14,6 +14,8 @@ function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [whoAmi, setWhoAmi] = useState(null);
+  const [idToken, setIdToken] = useState(null);
+
   const history = useHistory();
 
   async function regEmail(email, password) {
@@ -26,25 +28,64 @@ function AuthProvider({ children }) {
 
   async function regGoogle() {
     const provider = new firebase.auth.GoogleAuthProvider();
-    const result = await firebase.auth().signInWithPopup(provider);
-    setCurrentUser(result.user);
+    await firebase.auth().signInWithRedirect(provider);
+  }
 
-    const idToken = await result.user.getIdToken();
-    console.log(idToken);
+  async function getIdToken() {
+    return await currentUser.getIdToken();
   }
 
   async function signOut() {
     await auth.signOut();
-    history.push("/");
   }
 
   useEffect(() => {
-    const unsubscriber = auth.onAuthStateChanged((user) => {
-      /* TODO: WhoAmi from Server */
+    const unsubscriber = auth.onAuthStateChanged(async (user) => {
+      if (!user) {
+        setLoading(false);
+        return history.push("/welcome");
+      }
+
+      const iToken = await user.getIdToken();
+
+      try {
+        const res = await fetch("https://api.healthbay.us/whoami", {
+          headers: { authorization: "Bearer " + iToken },
+        }).then((r) => r.json());
+
+        if (res.status === "OK") setWhoAmi(res);
+
+        let url = null;
+
+        switch (res.type) {
+          case "PATIENT":
+            url = "https://api.healthbay.us/user/profile/" + res.id;
+            break;
+          case "DOCTOR":
+            url = "https://api.healthbay.us/doctor/profile/" + res.id;
+            break;
+          case "HOSPITAL":
+            url = "https://api.healthbay.us/hospital/profile/" + res.id;
+            break;
+          case "AMBULANCE":
+            url = "https://api.healthbay.us/ambulance/profile/" + res.id;
+            break;
+          default:
+            url = null;
+        }
+
+        const { data } = await fetch(url, {
+          headers: { authorization: "Bearer " + iToken },
+        }).then((r) => r.json());
+
+        setWhoAmi({ ...res, profile: data });
+      } catch {
+        setWhoAmi(null);
+      }
 
       setLoading(false);
       setCurrentUser(user);
-      setWhoAmi(null);
+      setIdToken(iToken);
 
       if (user) {
         history.push("/");
@@ -53,16 +94,18 @@ function AuthProvider({ children }) {
 
     return unsubscriber;
     // eslint-disable-next-line
-  }, [setCurrentUser]);
+  }, [setCurrentUser, setWhoAmi]);
 
   const value = {
     currentUser,
     loading,
     whoAmi,
+    getIdToken,
     signInEmail,
     regEmail,
     regGoogle,
     signOut,
+    idToken,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

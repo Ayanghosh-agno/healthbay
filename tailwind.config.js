@@ -10,6 +10,9 @@ module.exports = {
       },
       colors: {
         primary: "#3B82F6",
+        secondary: "#1A407D",
+        "theme-red": "#F7253D",
+        "theme-red-lighter": "#FF586B",
         "primary-lighter": "#ECF3FF",
         "grayish-lighter": "#CCCCCC",
         "text-color-theme": "#222222",

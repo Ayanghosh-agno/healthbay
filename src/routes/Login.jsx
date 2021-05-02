@@ -18,26 +18,32 @@ function Login() {
   const email = useRef();
   const password = useRef();
 
+  const [loading, setLoading] = useState(false);
   const [validationErr, setValidationErr] = useState("");
 
   const handleSubmitSignup = async function (e) {
     e.preventDefault();
+    setLoading(true);
     try {
       await signInEmail(email.current.value, password.current.value);
     } catch (e) {
       setValidationErr(e.message);
+    } finally {
+      setLoading(false);
     }
   };
 
   const signInWithGoogle = async function (e) {
     e.preventDefault();
+    setLoading(true);
     await regGoogle();
+    setLoading(false);
   };
 
   return (
     <div className="flex flex-col justify-center h-screen">
       <CircleIconButton
-        className="mt-4 ml-2"
+        className="mt-4 ml-2 z-10"
         icon={<FaArrowLeft />}
         onClick={() => history.push("/welcome")}
       />
@@ -52,7 +58,7 @@ function Login() {
           </label>
           <InputField
             className="mt-1 text-lg"
-            type="text"
+            type="email"
             id="email"
             ref={email}
             error={validationErr}
@@ -77,8 +83,14 @@ function Login() {
         {validationErr && (
           <div className="text-red-600 -mt-2">{validationErr}</div>
         )}
-        <FilledButton className="mt-2 mb-4 w-full">Login</FilledButton>
-        <OutlinedButton onClick={signInWithGoogle} className="w-full">
+        <FilledButton className="mt-2 mb-4 w-full" loading={loading}>
+          Login
+        </FilledButton>
+        <OutlinedButton
+          onClick={signInWithGoogle}
+          loading={loading}
+          className="w-full"
+        >
           <FcGoogle className="mr-4" />
           Sign in with Google
         </OutlinedButton>
