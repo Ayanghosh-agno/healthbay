@@ -89,11 +89,11 @@ const FirstSection = ({ theme }) => (
       <SectionText>
         Keeping track of everything doesn't have to be hard. Find out how.
       </SectionText>
-      <CTA text={'Explore!'} className="desktop-only" />
+      <CTA text={'See Source'} className="desktop-only" />
     </div>
     <img src={mockups.firstSection[theme]} alt="Home and habits page" />
     <div className="mobile-only">
-      <CTA text={'Explore!'} />
+      <CTA text={'See Source'} />
     </div>
   </FirstSectionContainer>
 )
