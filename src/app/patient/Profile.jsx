@@ -71,7 +71,7 @@ function Profile() {
   };
 
   return (
-    <div className="mx-4">
+    <div className="mx-4 mb-8 mt-4">
       <div className="text-xl font-semibold">Your Profile</div>
       <div className="py-2">
         <Data label="name" value={profile.name} />
@@ -91,7 +91,7 @@ function Profile() {
         />
         <Data className="mt-4" label="contact" value={profile.contact} />
       </div>
-      <div className="text-xl font-semibold mt-8">Medical History</div>
+      <div className="text-xl font-semibold mt-6">Medical History</div>
       {medicalHistory === null ? (
         <>Loading...</>
       ) : (
@@ -102,7 +102,22 @@ function Profile() {
               records you had.
             </>
           ) : (
-            <></>
+            <ul>
+              {medicalHistory.map((mh, i) => (
+                <li className="bg-primary-lighter rounded my-2 p-2" key={i}>
+                  <div className="flex flex-row items-center justify-between">
+                    <div className="text-lg font-medium">{mh.title}</div>
+                    <div className="bg-primary text-white px-2 rounded-full">
+                      {mh.type}
+                    </div>
+                  </div>
+                  <div className="text-sm text-primary font-semibold italic">
+                    {mh.year}
+                  </div>
+                  <div className="mt-1">{mh.description}</div>
+                </li>
+              ))}
+            </ul>
           )}
         </>
       )}

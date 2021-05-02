@@ -74,11 +74,13 @@ function AuthProvider({ children }) {
             url = null;
         }
 
-        const { data } = await fetch(url, {
-          headers: { authorization: "Bearer " + iToken },
-        }).then((r) => r.json());
+        if (url) {
+          const { data } = await fetch(url, {
+            headers: { authorization: "Bearer " + iToken },
+          }).then((r) => r.json());
 
-        setWhoAmi({ ...res, profile: data });
+          setWhoAmi({ ...res, profile: data });
+        }
       } catch {
         setWhoAmi(null);
       }

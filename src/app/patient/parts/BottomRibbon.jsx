@@ -12,6 +12,7 @@ function BottomRibbon() {
       <div
         className="absolute bg-theme-red w-20 h-20 rounded-full flex items-center justify-center text-xl font-semibold top-0 left-1/2 -ml-10 -mt-10 border-4 border-white text-white"
         onClick={() => history.push("/emergency")}
+        style={{ zIndex: 500 }}
       >
         SOS
       </div>

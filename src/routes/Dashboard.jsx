@@ -13,7 +13,6 @@ import { useAuth } from "../contexts/AuthContext";
 
 function Dashboard() {
   const { whoAmi } = useAuth();
-
   if (!whoAmi) return <Redirect to="/onboarding" />;
 
   switch (whoAmi.type) {

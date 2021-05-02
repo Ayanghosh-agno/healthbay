@@ -157,7 +157,7 @@ function Device() {
       {whoAmi.profile.device_id ? (
         <>
           <div className="absolute flex items-center rounded-full space-x-2 px-3 py-1 top-2 right-2 bg-theme-red-lighter">
-            <div className="w-2 h-2 bg-white rounded-full"></div>
+            <div className="w-1 h-1 bg-white rounded-full animate-ping"></div>
             <div className="text-xs uppercase">LIVE FROM HRTSPO2-SENSOR</div>
           </div>
           {liveData.length > 0 ? (
