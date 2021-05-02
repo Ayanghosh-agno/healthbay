@@ -1,14 +1,21 @@
 import React from "react";
-import { useAuth } from "../contexts/AuthContext";
+import { Switch } from "react-router";
 
-function Doctor() {
-  const { signOut } = useAuth();
+import Home from "../app/doctor/Home";
+import Profile from "../app/doctor/Profile";
+
+import PrivateRoute from "../components/PrivateRoute";
+import Wrapper from "../app/doctor/parts/Wrapper";
+
+function Patient() {
   return (
-    <div>
-      <div>Hey, doctor</div>
-      <button onClick={signOut}>Sign out</button>
-    </div>
+    <Wrapper>
+      <Switch>
+        <PrivateRoute path="/" exact component={Home} />
+        <PrivateRoute path="/profile" exact component={Profile} />
+      </Switch>
+    </Wrapper>
   );
 }
 
-export default Doctor;
+export default Patient;
