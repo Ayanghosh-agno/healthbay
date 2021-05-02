@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+    backend:
+        container_name: backend
+        restart: always
+        env_file:
+            - "../.env"
+        build:
+            context: ../src
+            dockerfile: Dockerfile
+        expose:
+            - 8080
+        command: gunicorn -w 1 -b 0.0.0.0:8080 wsgi:app
+        depends_on:
+            - "db"
+
+    db:
+        container_name: "db"
+        image: "mysql"
+        env_file:
+            - ./.env.dev
