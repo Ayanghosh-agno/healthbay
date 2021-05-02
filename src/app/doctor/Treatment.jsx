@@ -7,6 +7,7 @@ import CircleIconButton from "../../components/CircleIconButton";
 import InputField from "../../components/InputField";
 import { useAuth } from "../../contexts/AuthContext";
 import Loading from "../../screens/Loading";
+import getAge from "../../utils/age";
 
 function Treatment(props) {
   const history = useHistory();
@@ -20,7 +21,7 @@ function Treatment(props) {
 
   const fetchMessages = useCallback(async () => {
     const res = await fetch(
-      "https://api.healthbay.us/user/treatment/" + trtId + "/messages",
+      "https://api.healthbay.us/doctor/treatment/" + trtId + "/messages",
       {
         headers: {
           authorization: "Bearer " + (await getIdToken()),
@@ -32,7 +33,7 @@ function Treatment(props) {
   }, [setMessages, getIdToken, trtId]);
 
   const fetchData = useCallback(async () => {
-    const { data } = await fetch("https://api.healthbay.us/user/treatments", {
+    const { data } = await fetch("https://api.healthbay.us/doctor/treatment", {
       headers: {
         authorization: "Bearer " + (await getIdToken()),
       },
@@ -63,7 +64,7 @@ function Treatment(props) {
     typeMsg.current.value = "";
 
     if (msg === "/close") {
-      await fetch("https://api.healthbay.us/user/treatment/" + trtId, {
+      await fetch("https://api.healthbay.us/doctor/treatment/" + trtId, {
         method: "DELETE",
         headers: {
           authorization: "Bearer " + (await getIdToken()),
@@ -74,14 +75,17 @@ function Treatment(props) {
       return;
     }
 
-    await fetch("https://api.healthbay.us/user/treatment/" + trtId + "/chat", {
-      method: "POST",
-      headers: {
-        authorization: "Bearer " + (await getIdToken()),
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ msg, type: "chat" }),
-    }).then((x) => x.json());
+    await fetch(
+      "https://api.healthbay.us/doctor/treatment/" + trtId + "/chat",
+      {
+        method: "POST",
+        headers: {
+          authorization: "Bearer " + (await getIdToken()),
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ msg, type: "chat" }),
+      }
+    ).then((x) => x.json());
 
     await fetchMessages();
   };
@@ -97,32 +101,31 @@ function Treatment(props) {
         <img
           src={
             treatment
-              ? `${treatment.doctor.picture}`
+              ? `${treatment.patient.picture}`
               : "/assets/images/wel-doc.png"
           }
           alt="Your Doctor"
           className="h-14 w-14 rounded-full border-2 border-dashed p-1 shadow border-white cursor-pointer"
           onClick={() => {
-            if (treatment)
-              history.push("/doctor/" + treatment.doctor.id, {
-                doNotStartTreatment: true,
-              });
+            if (treatment) history.push("/patient/" + treatment.patient.id);
           }}
         />
         <div
           className="text-white cursor-pointer"
           onClick={() => {
-            if (treatment)
-              history.push("/doctor/" + treatment.doctor.id, {
-                doNotStartTreatment: true,
-              });
+            if (treatment) history.push("/patient/" + treatment.patient.id);
           }}
         >
           <div className="text-xl">
-            {treatment ? `${treatment.doctor.name}` : ""}
+            {treatment ? `${treatment.patient.name}` : ""}
           </div>
           <div className="text-sm">
-            {treatment ? `${treatment.doctor.specialization}` : ""}.
+            {treatment
+              ? `${getAge(treatment.patient.dob)} years, ${
+                  treatment.patient.height
+                } cms, ${treatment.patient.weight} kgs`
+              : ""}
+            .
           </div>
         </div>
       </div>
@@ -146,7 +149,7 @@ function Treatment(props) {
                       <div
                         key={i}
                         className={`bg-blue-700 text-white p-1 px-2 max-w-xs rounded-md my-1 ${
-                          m.by === 1 ? "self-start" : "self-end"
+                          m.by === 1 ? "self-end" : "self-start"
                         }`}
                       >
                         {m.msg}

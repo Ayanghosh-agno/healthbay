@@ -1,10 +1,12 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { FiSend, FiAlertTriangle } from "react-icons/fi";
+import { useHistory } from "react-router";
 import { useAuth } from "../../contexts/AuthContext";
 import Loading from "../../screens/Loading";
 import getAge from "../../utils/age";
 
 function Home() {
+  const history = useHistory();
   const { whoAmi, getIdToken } = useAuth();
   const [treatments, setTreatments] = useState(null);
 
@@ -45,8 +47,12 @@ function Home() {
           Ongoing Treatments
         </div>
         <ul className="w-full mt-2">
-          {treatments.map((t) => (
-            <li className="relative bg-primary p-4 rounded-md w-full flex flex-row items-center shadow space-x-4 hover:shadow-lg cursor-pointer">
+          {treatments.map((t, i) => (
+            <li
+              key={i}
+              className="relative bg-primary p-4 rounded-md w-full flex flex-row items-center shadow space-x-4 hover:shadow-lg cursor-pointer"
+              onClick={() => history.push("/treatment/" + t.treatment_id)}
+            >
               <img
                 src={t.patient.picture}
                 alt="Patient"
