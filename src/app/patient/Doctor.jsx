@@ -98,16 +98,16 @@ function Doctor(props) {
             {doc.hospital_id ? (
               <a
                 className="text-primary"
-                href={`geo:${doc.hospital.location[0]},${doc.hospital.location[1]}`}
+                href={`https://www.google.com/maps/search/?api=1&query=${doc.hospital.location[0]},${doc.hospital.location[1]}`}
               >
                 Hospital {doc.hospital.name}
               </a>
             ) : (
               <a
                 className="text-primary"
-                href={`geo:${JSON.parse(doc.chamber_location)[0]},${
-                  JSON.parse(doc.chamber_location)[1]
-                }`}
+                href={`https://www.google.com/maps/search/?api=1&query=${
+                  JSON.parse(doc.chamber_location)[0]
+                },${JSON.parse(doc.chamber_location)[1]}`}
               >
                 Personal Chamber
               </a>

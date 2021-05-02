@@ -1,6 +1,6 @@
 import React, { useCallback, useState, useEffect } from "react";
 import { FiAlertTriangle, FiSend } from "react-icons/fi";
-import { useHistory } from "react-router";
+import { Redirect, useHistory } from "react-router";
 
 import TreatmentCard from "../../components/TreatmentCard";
 import InputField from "../../components/InputField";
@@ -10,7 +10,7 @@ import Device from "./parts/Device";
 import { useAuth } from "../../contexts/AuthContext";
 
 function Home() {
-  const { getIdToken } = useAuth();
+  const { getIdToken, whoAmi } = useAuth();
   const history = useHistory();
   const [lastTreatment, setLastTreatment] = useState(null);
 
@@ -28,6 +28,8 @@ function Home() {
   useEffect(() => {
     fetchData();
   }, [fetchData]);
+
+  if (whoAmi.profile.emergency) return <Redirect to="/emergency" />;
 
   return (
     <>

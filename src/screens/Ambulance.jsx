@@ -1,14 +1,16 @@
 import React from "react";
-import { useAuth } from "../contexts/AuthContext";
+import { Switch } from "react-router";
 
-function Ambulance() {
-  const { signOut } = useAuth();
+import Home from "../app/ambulance/Home";
+
+import PrivateRoute from "../components/PrivateRoute";
+
+function Patient() {
   return (
-    <div>
-      <div>Hey, ambulance</div>
-      <button onClick={signOut}>Sign out</button>
-    </div>
+    <Switch>
+      <PrivateRoute path="/" exact component={Home} />
+    </Switch>
   );
 }
 
-export default Ambulance;
+export default Patient;
