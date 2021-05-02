@@ -9,7 +9,10 @@ function BottomRibbon() {
 
   return (
     <div className="relative">
-      <div className="absolute bg-theme-red w-20 h-20 rounded-full flex items-center justify-center text-xl font-semibold top-0 left-1/2 -ml-10 -mt-10 border-4 border-white text-white">
+      <div
+        className="absolute bg-theme-red w-20 h-20 rounded-full flex items-center justify-center text-xl font-semibold top-0 left-1/2 -ml-10 -mt-10 border-4 border-white text-white"
+        onClick={() => history.push("/emergency")}
+      >
         SOS
       </div>
       <div className="bg-secondary h-20 flex flex-row items-center justify-center space-x-8 text-white text-2xl shadow-inner">

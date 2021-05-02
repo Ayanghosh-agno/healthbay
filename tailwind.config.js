@@ -17,6 +17,9 @@ module.exports = {
         "grayish-lighter": "#CCCCCC",
         "text-color-theme": "#222222",
       },
+      minHeight: {
+        64: "16rem",
+      },
     },
   },
   variants: {

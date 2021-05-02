@@ -8,6 +8,7 @@ import Nearby from "../app/patient/Nearby";
 
 import PrivateRoute from "../components/PrivateRoute";
 import Wrapper from "../app/patient/parts/Wrapper";
+import Emergency from "../app/patient/Emergency";
 
 function Patient() {
   return (
@@ -17,6 +18,7 @@ function Patient() {
         <PrivateRoute path="/treatments" exact component={Treatments} />
         <PrivateRoute path="/nearby" exact component={Nearby} />
         <PrivateRoute path="/profile" exact component={Profile} />
+        <PrivateRoute path="/emergency" exact component={Emergency} />
       </Switch>
     </Wrapper>
   );

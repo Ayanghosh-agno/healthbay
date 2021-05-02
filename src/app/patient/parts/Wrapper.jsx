@@ -6,7 +6,7 @@ function Wrapper(props) {
   return (
     <div className="flex flex-col justify-between h-screen">
       <TopRibbon />
-      <div className="overflow-auto">{props.children}</div>
+      <div className="overflow-auto hide-scrollbar">{props.children}</div>
       <BottomRibbon />
     </div>
   );
