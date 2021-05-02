@@ -74,7 +74,7 @@ const Footer = () => (
       <CTA text="Explore" isApp />
       <CTA text="Source" className="ghost ghost-white" />
     </div>
-    <p className="footer">©SharnoxZ 2021</p>
+    <p className="footer">©SharnoxZ 2021 | Crafted with care at RU Hacks 2021</p>
   </FooterContainer>
 )
 

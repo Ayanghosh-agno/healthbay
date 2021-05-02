@@ -68,7 +68,7 @@ const CTA = ({ text, className, isApp }) => (
 CTA.propTypes = {
   text: PropTypes.string.isRequired,
   className: PropTypes.string,
-  isPlayStore: PropTypes.bool
+  isApp: PropTypes.bool
 }
 
 export default CTA

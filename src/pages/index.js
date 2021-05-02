@@ -2,7 +2,6 @@ import React from 'react'
 import Topbar from '../components/Topbar'
 import FirstSection from '../components/FirstSection'
 import SecondSection from '../components/SecondSection'
-import ThirdSection from '../components/ThirdSection'
 import FourthSection from '../components/FourthSection'
 import Footer from '../components/Footer'
 import Banner from '../components/Banner'
@@ -24,7 +23,6 @@ const IndexPage = () => {
         <FirstSection theme={theme} />
         <SecondSection />
         <Banner theme={theme} />
-        <ThirdSection theme={theme} />
         <FourthSection theme={theme} />
       </main>
       <Footer />

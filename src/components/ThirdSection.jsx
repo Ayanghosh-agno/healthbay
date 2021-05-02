@@ -1,4 +1,4 @@
-import React from 'react'
+/* import React from 'react'
 import SectionTitle from './SectionTitle'
 import ModuleContent from './ModuleContent'
 import { mockups } from '../utils/mockups'
@@ -114,3 +114,4 @@ ThirdSection.propTypes = {
 }
 
 export default ThirdSection
+ */

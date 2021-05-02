@@ -1,4 +1,4 @@
-import React from 'react'
+/* import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import AmbulanceIcon from '../images/svg/ambulance.svg'
@@ -117,3 +117,4 @@ ModuleContent.propTypes = {
 }
 
 export default ModuleContent
+ */

@@ -138,7 +138,7 @@ const Banner = ({ theme }) => (
           at a single place!
         </h3>
         <div className="buttons">
-          <CTA text={'Download the app'} className={'inverse'} isPlayStore />
+          <CTA text={'Explore!'} className={'inverse'} isApp />
           <CTA text={'View Source'} className={'ghost'} />
         </div>
       </div>
