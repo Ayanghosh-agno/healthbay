@@ -7,16 +7,16 @@ Keeping light on the same, it's also evident that **elderly’s ability to acces
 
 ![old-man-heart-attck](https://i.postimg.cc/fWgT11kG/old-man.jpg)
 
-There is a need for a technology platform to **Revolutionize the operation of exisiting Medical System** and that's how our project **Healthbay** jumps in! 
+There is a need for a technology platform to **Revolutionize the operation of existing Medical System** and that's how our project **Healthbay** jumps in! 
 
 ![healthbay-logo-main.png](https://i.postimg.cc/7Z46N05h/healthbay-logo-main.png)
 
 ## What is Healthbay?
-**Healthbay** is the concatenation of Health and Bay which together stands as the **Gateway of  Healthcare System**. Our software is a web application that utilizes cutting-edge modern technologies to *Revolutionize the existing Healthcare system*! *Healthbay* is a complete healthcare system for everyone, including Patients, Doctors & is directly connected with Healthcare centres/Hospitals with integrated SOS feature supported by Proximity-mapping, specially designed for elderlies to initiate checkups with real-time remote monitoring without needing to visit a doctor. Please follow through to explore! 
+**Healthbay** is the concatenation of Health and Bay which together stands as the **Gateway of  Healthcare System**. Our software is a web application that utilizes cutting-edge modern technologies to *Revolutionize the existing Healthcare system*! *Healthbay* is a complete healthcare system for everyone, including Patients, Doctors & is directly connected with Healthcare centers/Hospitals with an integrated SOS feature supported by Proximity-mapping, specially designed for elderlies to initiate checkups with real-time remote monitoring without needing to visit a doctor. Please follow through to explore! 
 
-Our app is distinguishably sectioned for different operations. *Healthbay*'s packed with various features and comes along with it's child **H-Clip** which is a seperate device helping in tracking Pulses/per-minute and SPO2 levels, everything at real-time from which we later extract the Blood Pressure levels using our custom made models.
+Our app is distinguishably sectioned for different operations. *Healthbay*'s packed with various features and comes along with it's child **H-Clip** which is a separate device helping in tracking Pulses/per-minute and SPO2 levels, everything at real-time from which we later extract the Blood Pressure levels using our custom made models.
 
-Although we could have proceeded for a contact-less method using camera feed, but upon carrying out extensive research, we decided to choose a physical device not just because they are more accurate and effective, but because, it will provide a lot more mobility! Moreover, excluding the same helps in ensuring 100% GDPR compatability offering seamless **user privacy**!
+Although we could have proceeded with a contact-less method using camera feed, but upon carrying out extensive research, we decided to choose a physical device not just because they are more accurate and effective, but because, it will provide a lot more mobility! Moreover, excluding the same helps in ensuring 100% GDPR compatibility offering seamless **user privacy**!
 
 A further explanation of how each of these works can be found in the Engineering section below.
 
@@ -25,7 +25,7 @@ A further explanation of how each of these works can be found in the Engineering
 1. **Get onboard on Healthbay**
 2. **Add your personal details**
 3. **Explore the dashboard and try out it's features**
-4. **Initiate Chat/VC between verified and regiestered Doctors and Users**
+4. **Initiate Chat/VC between verified and registered Doctors and Users**
 5. **Live Tracking of health data**
 6. **Emergency response SOS**
 7. **Live Ambulance Tracking**
@@ -37,11 +37,11 @@ Healthbay currently supports all of the following features!
 
 > 1. Minimalistic Material-UI inspired UX with a mobile-first approach.
 > 2. It's a React **PWA**, hence has support for both desktop & mobile devices.
-> 3. Dynamic Onboarding for User/Patient, Doctors, Hopitals & Ambulance.
+> 3. Dynamic Onboarding for User/Patient, Doctors, Hospitals & Ambulance.
 > 4. Distinguishable dashboards for all of the above.
 > 5. Dynamic Verification of legal documents via Authorization Body.
 > 6. Medical History (Report + Prescription docs) Vault backed by **Blockchain**
-> 7. End-to-End encypted P2P chat with notification & prescribing featues.
+> 7. End-to-End encrypted P2P chat with notification & prescribing features.
 > 8. Instant SOS feature.
 > 9. Proximity mapping for Ambulances with respect to Users.
 > 10. Dynamic synchronization of Hospital Beds & Ambulances.
@@ -69,7 +69,7 @@ We were heavily inspired by the revised version of **Double Diamond** design pro
 > 3. **Develop**: think up solutions to the problem.
 > 4. **Deliver**: pick the best solution and build that.
 
-We utilized design tools like [**Figma**](https://www.figma.com/file/p8VXBK0JBCo2jRClIqXoQi/Health-Bay) & Photoshop to protoype our designs and design palette before doing any coding. Through this, we are able to get iterative feedback so that we spend less time re-writing code.
+We utilized design tools like [**Figma**](https://www.figma.com/file/p8VXBK0JBCo2jRClIqXoQi/Health-Bay) & Photoshop to prototype our designs and design palette before doing any coding. Through this, we are able to get iterative feedback so that we spend less time re-writing code.
 
 ![figma-prototype](https://i.postimg.cc/Qtwky07c/figma-prototype.png)
 
@@ -84,12 +84,12 @@ We utilized design tools like [**Figma**](https://www.figma.com/file/p8VXBK0JBCo
 **So, how everything works?**
 
 ### Backend
-Our backend is built in Flask and Node.js(used for multithread application), connected to a SQLite Database. Moreover, all of the ML processings are being performed on AI platform which comes along with GCP. The central server connects with the NodeMCU via MQTT which is primarily attached with two other sensors, MAX30100 and HDx-2 which helps in monitoring Pulse beats and SPO2 levels respectively along with vibration, in case if sudden-fall is triggered. We use a pretrained and an another custom made model, which we run on the AI platform to analyse health diseases (datasets mentioned below). Medical records are stored in the GCS bucket where we keep a worker to intiate an action while we store the records on the Blockchain which can be accessed via [here](https://www.api.healthbay.us/blockchain). The database connection is established with SQLite and an NGINX reverse proxy is set up for load balancing. All of the responses and requests are routed via REST.
+Our backend is built in Flask and Node.js(used for running async multithread operations), connected to an SQLite Database. Moreover, all of the ML processings are being performed on AI platform which comes along with GCP. The central server connects with the NodeMCU via MQTT which is primarily attached with two other sensors, MAX30100 and HDx-2 which helps in monitoring Pulse beats and SPO2 levels respectively along with vibration, in case of sudden-fall is triggered. We use a pre-trained and another custom-made model, which we run on the AI platform to analyze health diseases (datasets mentioned below). Medical records are stored in the GCS bucket where we keep a worker to initiate an action while we store the records on the Blockchain which can be accessed via [here](https://www.api.healthbay.us/blockchain). The database connection is established with SQLite and an NGINX reverse proxy is set up for load balancing. All of the responses and requests are routed via REST.
 
 For the Blockchain part, 
 ![blockchain](https://i.postimg.cc/q7WcQhLZ/blockchain-uo.jpg)
 
-• **Data Analysis** : For rapid flow, we took the help of three kaggle notebooks as mentioned below.
+• **Data Analysis** : For rapid flow, we took the help of three Kaggle notebooks as mentioned below.
 - Heart Disease Classifications (@cdabakoglu Kaggle) : https://bit.ly/3eQNEH1
 - Predicting heart disease using machine learning (@faressayah Kaggle) : https://bit.ly/3xHxKaj
 - Heart Fail:Analysis and Quick-prediction (@nayansakhiya Kaggle) : https://bit.ly/3tdPd6Z
