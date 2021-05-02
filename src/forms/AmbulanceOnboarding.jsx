@@ -59,7 +59,7 @@ function AmbulanceOnboarding() {
           type="text"
           id="vehicle_no"
           ref={vehicle_no}
-          placeholder="Enter hospital's name"
+          placeholder="Enter vehicle number"
         />
       </div>
       <div className="flex flex-col mb-4">

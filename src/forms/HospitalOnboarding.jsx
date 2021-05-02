@@ -122,7 +122,7 @@ function HospitalOnboarding() {
 
       <div className="flex flex-col mb-4 relative">
         <label className="font-semibold uppercase" htmlFor="bedCapacity">
-          Bed Capacity
+          Available Beds
         </label>
         <InputField
           className="mt-1 text-lg"
@@ -141,7 +141,7 @@ function HospitalOnboarding() {
         <MapContainer
           className="h-64 rounded-md"
           whenCreated={setMap}
-          center={[51.5074, 0.1278]}
+          center={[43.6577, -79.3788]}
           zoom={12}
         >
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />

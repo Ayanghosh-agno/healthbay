@@ -153,7 +153,7 @@ function Device() {
   };
 
   return (
-    <div className="relative bg-secondary min-h-64 flex flex-col items-center justify-center text-white overflow-hidden">
+    <div className="relative bg-gradient-to-r from-green-400 to-blue-500 min-h-64 flex flex-col items-center justify-center text-white overflow-hidden">
       {whoAmi.profile.device_id ? (
         <>
           <div className="absolute flex items-center rounded-full space-x-2 px-3 py-1 top-2 right-2 bg-theme-red-lighter">

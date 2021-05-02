@@ -152,6 +152,30 @@ function Treatment(props) {
                         {m.msg}
                       </div>
                     );
+                  else if (m.type === "pres")
+                    return (
+                      <div
+                        key={i}
+                        className={`relative pt-10 bg-blue-500 text-white p-3 max-w-xs rounded-md my-1 flex flex-row space-x-4 items-center ${
+                          m.by === 1 ? "self-start" : "self-end"
+                        }`}
+                      >
+                        <img
+                          src={`/assets/icons/${JSON.parse(m.msg).type}.png`}
+                          alt={JSON.parse(m.msg).type}
+                          className="w-16 bg-white rounded p-2"
+                        />
+                        <div className="">
+                          <div className="">
+                            {JSON.parse(m.msg).particulars}
+                          </div>
+                          <div className="">{JSON.parse(m.msg).times}</div>
+                        </div>
+                        <div className="absolute uppercase text-xs top-2 left-0 rounded-full px-2 py-1 bg-theme-red-lighter">
+                          prescription
+                        </div>
+                      </div>
+                    );
                   else return <></>;
                 })}
                 {treatment && treatment.closes && (

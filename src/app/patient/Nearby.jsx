@@ -165,7 +165,7 @@ function Nearby(props) {
           height: "28rem",
         }}
         whenCreated={setMap}
-        center={[51.5074, 0.1278]}
+        center={[43.6577, -79.3788]}
         zoom={12}
       >
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />

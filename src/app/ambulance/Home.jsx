@@ -155,7 +155,16 @@ function Home() {
         </>
       ) : (
         <>
-          <div className="">Hey, {whoAmi.profile.vehicle_number}</div>
+          <div className="relative">
+            Hey, {whoAmi.profile.vehicle_number}
+            {whoAmi.profile.verified && (
+              <img
+                className="absolute top-0 right-0 -mr-10 w-8 h-8 rounded-full"
+                src="/assets/images/verified.png"
+                alt="Verified"
+              ></img>
+            )}
+          </div>
           <img
             className={`rounded-md justify-center ${
               !inService && "filter grayscale"
@@ -181,7 +190,13 @@ function Home() {
           </FilledButton>
         </>
       )}
-      <OutlinedButton className="mb-4 absolute top-4" onClick={signOut}>
+      <OutlinedButton
+        className="mb-4 absolute top-4"
+        onClick={async () => {
+          await updateStatus(false);
+          await signOut();
+        }}
+      >
         Logout
       </OutlinedButton>
     </div>

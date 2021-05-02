@@ -1,13 +1,15 @@
 import React from "react";
-import { useAuth } from "../contexts/AuthContext";
+import { Switch } from "react-router";
+
+import Home from "../app/hospital/Home";
+
+import PrivateRoute from "../components/PrivateRoute";
 
 function Hospital() {
-  const { signOut } = useAuth();
   return (
-    <div>
-      <div>Hey, hospital</div>
-      <button onClick={signOut}>Sign out</button>
-    </div>
+    <Switch>
+      <PrivateRoute path="/" exact component={Home} />
+    </Switch>
   );
 }
 

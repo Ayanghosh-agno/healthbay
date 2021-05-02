@@ -106,8 +106,8 @@ function Doctor(props) {
               <a
                 className="text-primary"
                 href={`https://www.google.com/maps/search/?api=1&query=${
-                  JSON.parse(doc.chamber_location)[0]
-                },${JSON.parse(doc.chamber_location)[1]}`}
+                  JSON.parse(doc.chamber_location).lat
+                },${JSON.parse(doc.chamber_location).lng}`}
               >
                 Personal Chamber
               </a>

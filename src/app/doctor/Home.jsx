@@ -17,6 +17,8 @@ function Home() {
       },
     }).then((r) => r.json());
 
+    if (data === "INVALID TREATMENT ID") setTreatments([]);
+
     setTreatments(data.filter((d) => !d.closes));
   }, [getIdToken, setTreatments]);
 

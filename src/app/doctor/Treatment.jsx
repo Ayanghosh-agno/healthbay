@@ -1,21 +1,33 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { FaArrowLeft } from "react-icons/fa";
-import { FiSend } from "react-icons/fi";
+import { FiSend, FiX } from "react-icons/fi";
 import { useHistory } from "react-router";
+import Modal from "react-modal";
 
 import CircleIconButton from "../../components/CircleIconButton";
 import InputField from "../../components/InputField";
+import FilledButton from "../../components/FilledButton";
+import DropdownInput from "../../components/DropdownInput";
 import { useAuth } from "../../contexts/AuthContext";
 import Loading from "../../screens/Loading";
 import getAge from "../../utils/age";
+
+Modal.setAppElement("#root");
 
 function Treatment(props) {
   const history = useHistory();
   const { getIdToken } = useAuth();
   const typeMsg = useRef(null);
 
+  const type = useRef(null);
+  const pclrs = useRef(null);
+  const times = useRef(null);
+
   const [treatment, setTreatment] = useState(null);
   const [messages, setMessages] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+
+  const closeModal = () => setShowModal(false);
 
   const trtId = props.match.params.trtId;
 
@@ -56,12 +68,48 @@ function Treatment(props) {
     };
   }, [fetchData, fetchMessages]);
 
+  const prescribe = async () => {
+    const dt = {
+      type: type.current.value.trim(),
+      particulars: pclrs.current.value.trim(),
+      times: times.current.value.trim(),
+    };
+
+    type.current.value = "Tablet";
+    pclrs.current.value = "";
+    times.current.value = "";
+
+    if (dt.times && dt.particulars) {
+      await fetch(
+        "https://api.healthbay.us/doctor/treatment/" + trtId + "/chat",
+        {
+          method: "POST",
+          headers: {
+            authorization: "Bearer " + (await getIdToken()),
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ msg: JSON.stringify(dt), type: "pres" }),
+        }
+      ).then((x) => x.json());
+
+      await fetchData();
+
+      closeModal();
+    } else {
+      alert("Please fill in all the fields");
+    }
+  };
+
   const sendMessage = async (e) => {
     e.preventDefault();
     if (!typeMsg.current.value) return;
 
     const msg = typeMsg.current.value;
     typeMsg.current.value = "";
+
+    if (msg === "/prescribe") {
+      return setShowModal(true);
+    }
 
     if (msg === "/close") {
       await fetch("https://api.healthbay.us/doctor/treatment/" + trtId, {
@@ -155,6 +203,30 @@ function Treatment(props) {
                         {m.msg}
                       </div>
                     );
+                  else if (m.type === "pres")
+                    return (
+                      <div
+                        key={i}
+                        className={`relative pt-10 bg-blue-500 text-white p-3 max-w-xs rounded-md my-1 flex flex-row space-x-4 items-center ${
+                          m.by === 1 ? "self-end" : "self-start"
+                        }`}
+                      >
+                        <img
+                          src={`/assets/icons/${JSON.parse(m.msg).type}.png`}
+                          alt={JSON.parse(m.msg).type}
+                          className="w-16 bg-white rounded p-2"
+                        />
+                        <div className="">
+                          <div className="">
+                            {JSON.parse(m.msg).particulars}
+                          </div>
+                          <div className="">{JSON.parse(m.msg).times}</div>
+                        </div>
+                        <div className="absolute uppercase text-xs top-2 left-0 rounded-full px-2 py-1 bg-theme-red-lighter">
+                          prescription
+                        </div>
+                      </div>
+                    );
                   else return <></>;
                 })}
                 {treatment && treatment.closes && (
@@ -186,12 +258,71 @@ function Treatment(props) {
             icon={<FiSend />}
             type="submit"
           />
-          <div className="absolute bg-theme-red-lighter -mt-20 w-full text-center text-white text-sm">
+          <div className="absolute bg-theme-red-lighter -mt-24 w-full text-center text-white text-xs">
             Type <span className="font-mono">/close</span> to close the
-            treatment
+            treatment <br /> Type <span className="font-mono">/prescribe</span>{" "}
+            to prescribe drugs for this patient
           </div>
         </form>
       )}
+      <Modal
+        isOpen={showModal}
+        onRequestClose={closeModal}
+        style={{
+          content: {
+            maxHeight: "400px",
+            marginTop: "auto",
+            marginBottom: "auto",
+          },
+          overlay: { backgroundColor: "rgba(0, 0, 0, 0.5)" },
+        }}
+        contentLabel="Medical History Add Modal"
+      >
+        <div className="flex items-center justify-between">
+          <h2 className="text-xl font-medium mb-2">Add Prescription</h2>
+          <FiX
+            className="text-primary text-xl self-start mt-1 cursor-pointer"
+            onClick={closeModal}
+          />
+        </div>
+        <div className="flex flex-col mt-2 relative">
+          <label className="text-md" htmlFor="type">
+            Type
+          </label>
+          <DropdownInput
+            lvalues={["Tablet", "Capsule", "Syrup", "Drop", "Injection"]}
+            id="type"
+            ref={type}
+          />
+        </div>
+        <div className="flex flex-col mt-2">
+          <label className="text-md" htmlFor="title">
+            Particulars
+          </label>
+          <InputField
+            className="mt-2 text-md h-10"
+            type="text"
+            id="title"
+            ref={pclrs}
+            placeholder="Title"
+          />
+        </div>
+        <div className="flex flex-col mt-2">
+          <label className="text-md" htmlFor="desc">
+            Timings
+          </label>
+          <InputField
+            className="mt-2 text-md h-10"
+            type="text"
+            id="desc"
+            ref={times}
+            placeholder="When to eat?"
+          />
+        </div>
+        <FilledButton className="mt-6 w-full" onClick={prescribe}>
+          Prescribe
+        </FilledButton>
+      </Modal>
     </div>
   );
 }
