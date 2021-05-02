@@ -1,3 +1,5 @@
+![healthbay-logo-main.png](https://i.postimg.cc/7Z46N05h/healthbay-logo-main.png)
+
 ## Background
 The advent of the 𝐂𝐨𝐯𝐢𝐝-𝟏𝟗 has turned all of our lives upsides down. At present, the traditional emergency response supply chain appears to be breaking since, **Healthcare** facilities are facing catastrophic challenges in providing proper medical treatment. Healthcare has become expensive, visiting hospitals increases exposed contamination since it's time-consuming and often requires creating extensive schedule changes in one's daily routine. Moreover, hospitals don’t have the capacity for a large number of incoming patients. Additionally, treatments often feel inadequate and lack personalization since Doctors are incredibly busy. 
 
@@ -9,7 +11,6 @@ Keeping light on the same, it's also evident that **elderly’s ability to acces
 
 There is a need for a technology platform to **Revolutionize the operation of existing Medical System** and that's how our project **Healthbay** jumps in! 
 
-![healthbay-logo-main.png](https://i.postimg.cc/7Z46N05h/healthbay-logo-main.png)
 
 ## What is Healthbay?
 **Healthbay** is the concatenation of Health and Bay which together stands as the **Gateway of  Healthcare System**. Our software is a web application that utilizes cutting-edge modern technologies to *Revolutionize the existing Healthcare system*! *Healthbay* is a complete healthcare system for everyone, including Patients, Doctors & is directly connected with Healthcare centers/Hospitals with an integrated SOS feature supported by Proximity-mapping, specially designed for elderlies to initiate checkups with real-time remote monitoring without needing to visit a doctor. Please follow through to explore! 
@@ -141,3 +142,5 @@ This project was especially an achievement for us because this time the experien
 
 ### What's next for Healthbay
 As previously mentioned, *Healthbay* is one of the **most technically sound** projects we have made till now, and we would love to keep it open-sourced indefinitely so that anyone can contribute to the project since we are aiming to expand the wings of our project beyond the hackathon. Apart from fine-tuning the project, we're also planning to integrate new user-intuitive features such as refined User/Patient access, easy checkout option for hospitals, adding more such IoT-based inter-device support for maximizing our audience interaction. Apart from these, a lot of code needs to be refactored which does include CSS improvements for desktop preview as we couldn't hit so much under 48 hrs. Overall, we hope that one day this project can be widely used among the medical community to redefine the existing & remove the backlogs.
+
+# Look out for different Branches!
